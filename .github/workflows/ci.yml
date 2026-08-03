@@ -40,14 +40,21 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # - name: Build Backend Docker Image
+      #   run: |
+      #     docker build \
+      #       -t ashwindocker1808/ridematch-backend:latest \
+      #       ./backend
       - name: Build Backend Docker Image
         run: |
           docker build \
+            -t ashwindocker1808/ridematch-backend:${{ github.sha }} \
             -t ashwindocker1808/ridematch-backend:latest \
             ./backend
 
       - name: Push Backend Docker Image
         run: |
+          docker push ashwindocker1808/ridematch-backend:${{ github.sha }}
           docker push ashwindocker1808/ridematch-backend:latest
 
     # Login already done above
