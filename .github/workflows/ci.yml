@@ -49,3 +49,15 @@ jobs:
       - name: Push Backend Docker Image
         run: |
           docker push ashwindocker1808/ridematch-backend:latest
+
+    # Login already done above
+
+      - name: Build Frontend Docker Image
+        run: |
+          docker build \
+            -t ashwindocker1808/ridematch-frontend:latest \
+            ./frontend
+
+      - name: Push Frontend Docker Image
+        run: |
+          docker push ashwindocker1808/ridematch-frontend:latest
