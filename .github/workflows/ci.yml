@@ -48,7 +48,7 @@ jobs:
             ./backend
 
       - name: Scan Backend Image with Trivy
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@0.36.0
         with:
           image-ref: ashwindocker1808/ridematch-backend:${{ github.sha }}
           format: table
