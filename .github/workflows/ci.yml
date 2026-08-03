@@ -40,17 +40,20 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # - name: Build Backend Docker Image
-      #   run: |
-      #     docker build \
-      #       -t ashwindocker1808/ridematch-backend:latest \
-      #       ./backend
       - name: Build Backend Docker Image
         run: |
           docker build \
             -t ashwindocker1808/ridematch-backend:${{ github.sha }} \
             -t ashwindocker1808/ridematch-backend:latest \
             ./backend
+
+      - name: Scan Backend Image with Trivy
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: ashwindocker1808/ridematch-backend:${{ github.sha }}
+          format: table
+          exit-code: 1
+          severity: CRITICAL,HIGH
 
       - name: Push Backend Docker Image
         run: |
