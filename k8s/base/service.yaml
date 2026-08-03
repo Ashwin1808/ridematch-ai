@@ -1,0 +1,19 @@
+apiVersion: v1
+
+kind: Service
+
+metadata:
+  name: ridematch-backend-service
+  namespace: ridematch
+
+spec:
+
+  selector:
+    app: ridematch-backend
+
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 5001
+
+  type: ClusterIP

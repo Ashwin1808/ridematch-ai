@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: ridematch-ingress
+  namespace: ridematch
+
+spec:
+  ingressClassName: nginx
+
+  rules:
+    # - host: ridematch.local
+    - host: {{ .Values.ingress.host }}
+
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+
+            backend:
+              service:
+                name: ridematch-backend-service
+
+                port:
+                  # number: 5001
+                  number: {{ .Values.service.port }}

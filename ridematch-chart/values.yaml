@@ -1,0 +1,53 @@
+replicaCount: 3
+
+image:
+  repository: ashwindocker1808/ridematch-backend
+  # tag: v4
+  tag: v5
+  pullPolicy: Always
+
+service:
+  port: 5001
+
+resources:
+  requests:
+    cpu: "250m"
+    memory: "256Mi"
+
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+config:
+  nodeEnv: development
+  port: "5001"
+
+  dbHost: postgres
+  dbPort: "5432"
+  dbName: ridematch
+  dbUser: user
+
+  logLevel: DEBUG
+
+secret:
+  DB_PASSWORD: ""
+  JWT_SECRET: ""
+  GEMINI_API_KEY: ""
+  NEWS_API_KEY: ""
+  GNEWS_API_KEY: ""
+
+
+postgres:
+  port: 5432
+  storage: 2Gi
+  image: postgres:16
+
+ingress:
+  host: api.ridematch.local
+
+
+hpa:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50

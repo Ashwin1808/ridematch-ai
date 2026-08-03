@@ -1,0 +1,28 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: ridematch-alertmanager
+  namespace: monitoring
+  labels:
+    release: monitoring
+
+spec:
+  route:
+    receiver: gmail
+
+  receivers:
+    - name: gmail
+      emailConfigs:
+        - to: ashwinkrishnandevopsproject18@gmail.com
+          from: ashwinkrishnandevopsproject18@gmail.com
+
+          smarthost: smtp.gmail.com:587
+
+          authUsername: ashwinkrishnandevopsproject18@gmail.com
+          authIdentity: ashwinkrishnandevopsproject18@gmail.com
+
+          authPassword:
+            name: alertmanager-gmail-secret
+            key: password
+
+          requireTLS: true

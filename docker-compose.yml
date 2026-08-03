@@ -1,0 +1,63 @@
+services:
+
+  frontend:
+    container_name: ridematch-frontend
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_started
+    networks:
+      - ridematch-network
+
+  backend:
+    container_name: ridematch-backend
+    build:
+      context: ./backend
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./backend/.env
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - ridematch-network
+
+  postgres:
+    image: postgres:16
+    container_name: ridematch-postgres
+
+    restart: unless-stopped
+
+    ports:
+      - "5433:5432"
+
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_DB: ridematch
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d ridematch"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+    networks:
+      - ridematch-network
+
+volumes:
+  postgres-data:
+
+networks:
+  ridematch-network:
+    driver: bridge

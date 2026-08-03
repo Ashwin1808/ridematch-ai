@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: backend-config
+  namespace: ridematch
+
+data:
+
+  NODE_ENV: "development"
+
+  PORT: "5001"
+
+  DB_HOST: "postgres"
+
+  DB_PORT: "5432"
+
+  DB_NAME: "ridematch"
+
+  DB_USER: "user"
+
+  LOG_LEVEL: "DEBUG"
