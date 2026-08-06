@@ -98,7 +98,7 @@ jobs:
             ./backend
 
       - name: Scan Backend Image
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: ashwindocker1808/ridematch-backend:${{ github.sha }}
           format: template
@@ -127,7 +127,7 @@ jobs:
             ./frontend
 
       - name: Scan Frontend Image
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: ashwindocker1808/ridematch-frontend:${{ github.sha }}
           format: template
@@ -143,7 +143,7 @@ jobs:
           path: |
             backend-trivy-report.html
             frontend-trivy-report.html
-            
+
       - name: Upload Sonar Report
         uses: actions/upload-artifact@v4
         if: always()
