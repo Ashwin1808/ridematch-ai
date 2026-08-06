@@ -1,63 +1,74 @@
 services:
 
-  frontend:
-    container_name: ridematch-frontend
-    build:
-      context: ./frontend
-    ports:
-      - "3000:3000"
+  postgres:
+    image: postgres:16-alpine
+    container_name: ridematch-postgres
     restart: unless-stopped
-    depends_on:
-      backend:
-        condition: service_started
+
+    environment:
+      POSTGRES_DB: ridematch
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+    ports:
+      - "5432:5432"
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ridematch"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
     networks:
       - ridematch-network
 
   backend:
+    image: ashwindocker1808/ridematch-backend:latest
     container_name: ridematch-backend
-    build:
-      context: ./backend
-    ports:
-      - "5001:5001"
+
+    restart: unless-stopped
+
     env_file:
       - ./backend/.env
-    restart: unless-stopped
+
     depends_on:
       postgres:
         condition: service_healthy
+
+    ports:
+      - "5001:5001"
+
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
     networks:
       - ridematch-network
 
-  postgres:
-    image: postgres:16
-    container_name: ridematch-postgres
+  frontend:
+    image: ashwindocker1808/ridematch-frontend:latest
+
+    container_name: ridematch-frontend
 
     restart: unless-stopped
 
+    depends_on:
+      - backend
+
     ports:
-      - "5433:5432"
-
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: postgres123
-      POSTGRES_DB: ridematch
-
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d ridematch"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
+      - "3000:3000"
 
     networks:
       - ridematch-network
 
 volumes:
-  postgres-data:
+  postgres_data:
 
 networks:
   ridematch-network:
-    driver: bridge

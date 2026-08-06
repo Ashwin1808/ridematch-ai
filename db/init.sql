@@ -10,7 +10,7 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
-SET transaction_timeout = 0;
+-- SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -35,7 +35,7 @@ CREATE TABLE public.comparison_history (
 );
 
 
-ALTER TABLE public.comparison_history OWNER TO "user";
+ALTER TABLE public.comparison_history OWNER TO postgres;
 
 --
 -- Name: comparison_history_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -50,7 +50,7 @@ CREATE SEQUENCE public.comparison_history_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.comparison_history_id_seq OWNER TO "user";
+ALTER SEQUENCE public.comparison_history_id_seq OWNER TO postgres;
 
 --
 -- Name: comparison_history_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -70,7 +70,7 @@ CREATE TABLE public.favorites (
 );
 
 
-ALTER TABLE public.favorites OWNER TO "user";
+ALTER TABLE public.favorites OWNER TO postgres;
 
 --
 -- Name: favorites_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -85,7 +85,7 @@ CREATE SEQUENCE public.favorites_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.favorites_id_seq OWNER TO "user";
+ALTER SEQUENCE public.favorites_id_seq OWNER TO postgres;
 
 --
 -- Name: favorites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -107,7 +107,7 @@ CREATE TABLE public.recommendation_history (
 );
 
 
-ALTER TABLE public.recommendation_history OWNER TO "user";
+ALTER TABLE public.recommendation_history OWNER TO postgres;
 
 --
 -- Name: recommendation_history_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -122,7 +122,7 @@ CREATE SEQUENCE public.recommendation_history_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.recommendation_history_id_seq OWNER TO "user";
+ALTER SEQUENCE public.recommendation_history_id_seq OWNER TO postgres;
 
 --
 -- Name: recommendation_history_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -144,7 +144,7 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO "user";
+ALTER TABLE public.users OWNER TO postgres;
 
 --
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -159,7 +159,7 @@ CREATE SEQUENCE public.users_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.users_id_seq OWNER TO "user";
+ALTER SEQUENCE public.users_id_seq OWNER TO postgres;
 
 --
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -181,7 +181,7 @@ CREATE TABLE public.vehicle_reviews (
 );
 
 
-ALTER TABLE public.vehicle_reviews OWNER TO "user";
+ALTER TABLE public.vehicle_reviews OWNER TO postgres;
 
 --
 -- Name: vehicle_reviews_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -196,7 +196,7 @@ CREATE SEQUENCE public.vehicle_reviews_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.vehicle_reviews_id_seq OWNER TO "user";
+ALTER SEQUENCE public.vehicle_reviews_id_seq OWNER TO postgres;
 
 --
 -- Name: vehicle_reviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -216,7 +216,7 @@ CREATE TABLE public.vehicle_views (
 );
 
 
-ALTER TABLE public.vehicle_views OWNER TO "user";
+ALTER TABLE public.vehicle_views OWNER TO postgres;
 
 --
 -- Name: vehicle_views_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -231,7 +231,7 @@ CREATE SEQUENCE public.vehicle_views_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.vehicle_views_id_seq OWNER TO "user";
+ALTER SEQUENCE public.vehicle_views_id_seq OWNER TO postgres;
 
 --
 -- Name: vehicle_views_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
@@ -276,7 +276,7 @@ CREATE TABLE public.vehicles (
 );
 
 
-ALTER TABLE public.vehicles OWNER TO "user";
+ALTER TABLE public.vehicles OWNER TO postgres;
 
 --
 -- Name: vehicles_id_seq; Type: SEQUENCE; Schema: public; Owner: user
@@ -291,7 +291,7 @@ CREATE SEQUENCE public.vehicles_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.vehicles_id_seq OWNER TO "user";
+ALTER SEQUENCE public.vehicles_id_seq OWNER TO postgres;
 
 --
 -- Name: vehicles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
