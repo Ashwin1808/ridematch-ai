@@ -8,7 +8,7 @@ terraform {
 
     region = "ap-south-1"
 
-    profile = "ridematch"
+    # profile = "ridematch"
 
     dynamodb_table = "ridematch-terraform-locks"
 
