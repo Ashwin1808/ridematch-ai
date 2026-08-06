@@ -30,7 +30,8 @@
 
 locals {
 
-  environment = terraform.workspace
+  # environment = terraform.workspace
+  environment = terraform.workspace == "default" ? "dev" : terraform.workspace
 
   environments = {
 
