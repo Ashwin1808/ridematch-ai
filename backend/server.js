@@ -517,32 +517,6 @@ Return ONLY valid JSON.
   }
 });
 
-// app.get("/vehicle/:id/reviews", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-
-//     const result = await pool.query(
-//       `
-//       SELECT *
-//       FROM vehicle_reviews
-//       WHERE vehicle_id = $1
-//       `,
-//       [id],
-//     );
-
-//     res.json({
-//       success: true,
-//       reviews: result.rows,
-//     });
-//   } catch (error) {
-//     console.error(error);
-
-//     res.status(500).json({
-//       success: false,
-//       message: "Failed to fetch reviews",
-//     });
-//   }
-// });
 
 app.get("/vehicle/:id/reviews", async (req, res) => {
   try {
@@ -551,7 +525,7 @@ app.get("/vehicle/:id/reviews", async (req, res) => {
     const result = await pool.query(
       `
       SELECT *
-      FROM reviews
+      FROM vehicle_reviews
       WHERE vehicle_id = $1
       ORDER BY rating DESC
       `,
@@ -1587,6 +1561,13 @@ app.get("/profile", authenticateToken, async (req, res) => {
     });
   }
 });
+
+// app.get("/health", (req, res) => {
+//   res.status(200).json({
+//     status: "UP",
+//     service: "RideMatch Backend"
+//   });
+// });
 
 // SERVER START
 

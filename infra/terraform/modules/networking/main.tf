@@ -25,8 +25,8 @@ resource "aws_subnet" "public_subnet_1" {
   #   ManagedBy   = "Terraform"
   # }
   tags = merge(var.common_tags, {
-  Name = "ridematch-public-subnet-1"
-})
+    Name = "ridematch-public-subnet-1"
+  })
 }
 
 resource "aws_internet_gateway" "ridematch_igw" {
@@ -38,8 +38,66 @@ resource "aws_internet_gateway" "ridematch_igw" {
   #   ManagedBy   = "Terraform"
   # }
   tags = merge(var.common_tags, {
-  Name = "ridematch-igw"
-})
+    Name = "ridematch-igw"
+  })
+}
+
+resource "aws_eip" "nat_eip" {
+
+  domain = "vpc"
+
+  tags = merge(var.common_tags, {
+    Name = "ridematch-nat-eip"
+  })
+}
+
+resource "aws_nat_gateway" "nat_gateway" {
+
+  allocation_id = aws_eip.nat_eip.id
+
+  subnet_id = aws_subnet.public_subnet_1.id
+
+  depends_on = [
+    aws_internet_gateway.ridematch_igw
+  ]
+
+  tags = merge(var.common_tags, {
+    Name = "ridematch-nat-gateway"
+  })
+}
+
+resource "aws_route_table" "private_route_table" {
+
+  vpc_id = aws_vpc.ridematch_vpc.id
+
+  route {
+
+    cidr_block = "0.0.0.0/0"
+
+    nat_gateway_id = aws_nat_gateway.nat_gateway.id
+
+  }
+
+  tags = merge(var.common_tags, {
+    Name = "ridematch-private-route-table"
+  })
+}
+
+
+resource "aws_route_table_association" "private_subnet_1_association" {
+
+  subnet_id = aws_subnet.private_subnet_1.id
+
+  route_table_id = aws_route_table.private_route_table.id
+
+}
+
+resource "aws_route_table_association" "private_subnet_2_association" {
+
+  subnet_id = aws_subnet.private_subnet_2.id
+
+  route_table_id = aws_route_table.private_route_table.id
+
 }
 
 resource "aws_route_table" "public_route_table" {
@@ -55,9 +113,9 @@ resource "aws_route_table" "public_route_table" {
   #   Environment = "development"
   #   ManagedBy   = "Terraform"
   # }
-    tags = merge(var.common_tags, {
-  Name = "ridematch-public-route-table"
-})
+  tags = merge(var.common_tags, {
+    Name = "ridematch-public-route-table"
+  })
 }
 
 resource "aws_route_table_association" "public_subnet_1_association" {
@@ -76,9 +134,9 @@ resource "aws_subnet" "public_subnet_2" {
   #   Environment = "development"
   #   ManagedBy   = "Terraform"
   # }
-      tags = merge(var.common_tags, {
-  Name = "ridematch-public-subnet-2"
-})
+  tags = merge(var.common_tags, {
+    Name = "ridematch-public-subnet-2"
+  })
 }
 
 resource "aws_route_table_association" "public_subnet_2_association" {
@@ -97,9 +155,9 @@ resource "aws_subnet" "private_subnet_1" {
   #   Environment = "development"
   #   ManagedBy   = "Terraform"
   # }
-        tags = merge(var.common_tags, {
-  Name = "ridematch-private-subnet-1"
-})
+  tags = merge(var.common_tags, {
+    Name = "ridematch-private-subnet-1"
+  })
 }
 
 resource "aws_subnet" "private_subnet_2" {
@@ -113,7 +171,7 @@ resource "aws_subnet" "private_subnet_2" {
   #   Environment = "development"
   #   ManagedBy   = "Terraform"
   # }
-          tags = merge(var.common_tags, {
-  Name = "ridematch-private-subnet-2"
-})
+  tags = merge(var.common_tags, {
+    Name = "ridematch-private-subnet-2"
+  })
 }

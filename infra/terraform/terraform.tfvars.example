@@ -7,3 +7,9 @@ private_subnet_2_cidr = "10.0.12.0/24"
 
 availability_zone_1 = "ap-south-1a"
 availability_zone_2 = "ap-south-1b"
+
+db_password="<DB_PASSWORD>"
+jwt_secret="<JWT_SECRET>"
+gemini_api_key="<GEMINI_API_KEY>"
+news_api_key="<NEWS_API_KEY>"
+gnews_api_key="<GNEWS_API_KEY>"

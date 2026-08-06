@@ -1,7 +1,7 @@
 resource "aws_security_group" "backend_sg" {
   name        = "ridematch-backend-sg"
   description = "Security group for RideMatch backend"
-  vpc_id = var.vpc_id
+  vpc_id      = var.vpc_id
 
   # tags = {
   #   Name        = "ridematch-backend-sg"
@@ -9,8 +9,8 @@ resource "aws_security_group" "backend_sg" {
   #   ManagedBy   = "Terraform"
   # }
   tags = merge(var.common_tags, {
-  Name = "ridematch-backend-sg"
-})
+    Name = "ridematch-backend-sg"
+  })
 }
 
 
@@ -26,7 +26,7 @@ resource "aws_vpc_security_group_egress_rule" "backend_allow_all_outbound" {
 resource "aws_security_group" "alb_sg" {
   name        = "ridematch-alb-sg"
   description = "Security group for RideMatch ALB"
-  vpc_id = var.vpc_id
+  vpc_id      = var.vpc_id
 
   # tags = {
   #   Name        = "ridematch-alb-sg"
@@ -34,9 +34,9 @@ resource "aws_security_group" "alb_sg" {
   #   ManagedBy   = "Terraform"
   # }
   tags = merge(var.common_tags, {
-  # Name = "ridematch-backend-sg"
-    Name        = "ridematch-alb-sg"
-})
+    # Name = "ridematch-backend-sg"
+    Name = "ridematch-alb-sg"
+  })
 }
 
 resource "aws_vpc_security_group_ingress_rule" "alb_https" {
@@ -61,4 +61,46 @@ resource "aws_vpc_security_group_ingress_rule" "backend_from_alb" {
   ip_protocol                  = "tcp"
 
   description = "Allow backend traffic only from ALB"
+}
+
+resource "aws_vpc_security_group_ingress_rule" "alb_http" {
+
+  security_group_id = aws_security_group.alb_sg.id
+
+  cidr_ipv4 = "0.0.0.0/0"
+
+  from_port = 80
+  to_port   = 80
+
+  ip_protocol = "tcp"
+
+  description = "Allow HTTP from Internet"
+
+}
+
+resource "aws_vpc_security_group_ingress_rule" "backend_ssh" {
+
+  security_group_id = aws_security_group.backend_sg.id
+
+  cidr_ipv4 = "0.0.0.0/0"
+
+  from_port = 22
+  to_port   = 22
+
+  ip_protocol = "tcp"
+
+  description = "Temporary SSH"
+
+}
+
+resource "aws_vpc_security_group_egress_rule" "alb_outbound" {
+
+  security_group_id = aws_security_group.alb_sg.id
+
+  cidr_ipv4 = "0.0.0.0/0"
+
+  ip_protocol = "-1"
+
+  description = "Allow outbound"
+
 }

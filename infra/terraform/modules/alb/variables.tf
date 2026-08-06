@@ -14,10 +14,6 @@ variable "alb_sg_id" {
   type = string
 }
 
-variable "backend_instance_ids" {
-  type = list(string)
-}
-
 variable "common_tags" {
   type = map(string)
 }

@@ -2,10 +2,10 @@ resource "aws_lb_target_group" "backend_tg" {
   name     = "ridematch-backend-tg"
   port     = 5001
   protocol = "HTTP"
-  vpc_id = var.vpc_id
+  vpc_id   = var.vpc_id
 
   health_check {
-    path                = "/"
+    path                = "/health"
     protocol            = "HTTP"
     port                = "5001"
     healthy_threshold   = 2
@@ -16,10 +16,10 @@ resource "aws_lb_target_group" "backend_tg" {
   }
 
 
-tags = merge(var.common_tags, {
-        Name        = "ridematch-backend-tg"
+  tags = merge(var.common_tags, {
+    Name = "ridematch-backend-tg"
 
-})
+  })
 }
 
 # resource "aws_lb_target_group_attachment" "backend_test" {
@@ -29,15 +29,15 @@ tags = merge(var.common_tags, {
 #   port      = 5001
 # }
 
-resource "aws_lb_target_group_attachment" "backend" {
-  # for_each = toset(var.backend_instance_ids)
-  count = length(var.backend_instance_ids)
+# resource "aws_lb_target_group_attachment" "backend" {
+#   # for_each = toset(var.backend_instance_ids)
+#   count = length(var.backend_instance_ids)
 
-  target_group_arn = aws_lb_target_group.backend_tg.arn
-  # target_id        = each.value
-  target_id        = var.backend_instance_ids[count.index]
-  port             = 5001
-}
+#   target_group_arn = aws_lb_target_group.backend_tg.arn
+#   # target_id        = each.value
+#   target_id = var.backend_instance_ids[count.index]
+#   port      = 5001
+# }
 
 resource "aws_lb" "ridematch_alb" {
   name               = "ridematch-alb"
@@ -53,9 +53,9 @@ resource "aws_lb" "ridematch_alb" {
     var.public_subnet_2_id
   ]
 
-tags = merge(var.common_tags, {
+  tags = merge(var.common_tags, {
     Name = "ridematch-alb"
-})
+  })
 }
 
 resource "aws_lb_listener" "http" {
@@ -68,3 +68,5 @@ resource "aws_lb_listener" "http" {
     target_group_arn = aws_lb_target_group.backend_tg.arn
   }
 }
+
+

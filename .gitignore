@@ -58,3 +58,9 @@ secrets.yaml
 # ==========================
 *.swp
 *.tmp
+
+terraform.tfvars
+
+infra/terraform/terraform.tfvars
+.scannerwork/
+*.html
