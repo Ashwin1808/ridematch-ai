@@ -118,7 +118,7 @@ jobs:
       #   run: |
       #     docker build \
       #       -t ashwindocker1808/ridematch-frontend:latest \
-      #       ./frontend
+      #       ./frontend..
       - name: Build Frontend Docker Image
         run: |
           docker build \
