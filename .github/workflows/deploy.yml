@@ -22,6 +22,17 @@ jobs:
           script: |
             cd /home/ec2-user/ridematch-ai
 
+            cat > .env <<EOF
+            PORT=5001
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            DATABASE_URL=postgres://postgres:postgres123@postgres:5432/ridematch
+            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+            NEWS_API_KEY=${{ secrets.NEWS_API_KEY }}
+            GNEWS_API_KEY=${{ secrets.GNEWS_API_KEY }}
+            EOF
+
+            cd ..
+
             git pull origin main
 
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
