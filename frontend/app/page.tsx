@@ -23,11 +23,13 @@ export default function Home() {
   const router = useRouter();
   const [loggedIn, setLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
+  const API = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const response = await fetch("http://localhost:5001/dashboard");
+        // const response = await fetch("http://localhost:5001/dashboard");
+        const response = await fetch(`${API}/dashboard`);
         const data = await response.json();
         setDashboard(data);
       } catch (error) {
@@ -40,7 +42,8 @@ export default function Home() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await fetch("http://localhost:5001/news");
+        // const response = await fetch("http://localhost:5001/news");
+        const response = await fetch(`${API}/news`);
         const data = await response.json();
         setNews(data.articles || []);
       } catch (error) {
@@ -52,7 +55,8 @@ export default function Home() {
 
   useEffect(() => {
     const fetchFuel = async () => {
-      const res = await fetch("http://localhost:5001/fuel-prices");
+      // const res = await fetch("http://localhost:5001/fuel-prices");
+      const res = await fetch(`${API}/fuel-prices`);
       const data = await res.json();
       setFuel(data);
     };
@@ -70,7 +74,8 @@ export default function Home() {
 
   const handleRecommendation = async () => {
     try {
-      const response = await fetch("http://localhost:5001/recommend", {
+      // const response = await fetch("http://localhost:5001/recommend", {
+      const response = await fetch(`${API}/recommend`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

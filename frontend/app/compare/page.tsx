@@ -9,6 +9,8 @@ import CompareCards from "./components/CompareCards";
 export default function ComparePage() {
   const [vehicles, setVehicles] = useState<any[]>([]);
   const { compareList } = useCompare();
+  const API = process.env.NEXT_PUBLIC_API_URL;
+
 
   const [aiResult, setAiResult] = useState<any>(null);
   const [loadingAI, setLoadingAI] = useState(true);
@@ -23,7 +25,7 @@ export default function ComparePage() {
 
       try {
         const response = await fetch(
-          "http://localhost:5001/compare-ai",
+          `${API}/compare-ai`,
 
           {
             method: "POST",

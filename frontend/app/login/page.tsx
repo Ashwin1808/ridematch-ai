@@ -6,6 +6,7 @@ import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
+  const API = process.env.NEXT_PUBLIC_API_URL;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +18,7 @@ export default function LoginPage() {
     try {
       setLoading(true);
 
-      const response = await fetch("http://localhost:5001/login", {
+      const response = await fetch(`${API}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

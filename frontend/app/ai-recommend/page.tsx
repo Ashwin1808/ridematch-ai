@@ -12,11 +12,12 @@ export default function AIRecommendPage() {
   const [result, setResult] = useState<any>(null);
   const [vehicleType, setVehicleType] = useState("Car");
   const [prompt, setPrompt] = useState("");
+  const API = process.env.NEXT_PUBLIC_API_URL;
 
   const recommend = async () => {
     setLoading(true);
 
-    const res = await fetch("http://localhost:5001/recommend", {
+    const res = await fetch(`${API}/recommend`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

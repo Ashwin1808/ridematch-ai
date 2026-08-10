@@ -10,10 +10,12 @@ export default function FuelCalculator() {
   // const [fuelPrice, setFuelPrice] = useState("");
   const [fuelPrice, setFuelPrice] = useState("0");
   const [fuelType, setFuelType] = useState("petrol");
+  const API = process.env.NEXT_PUBLIC_API_URL;
+
 
   useEffect(() => {
     const loadFuelPrice = async () => {
-      const res = await fetch("http://localhost:5001/fuel-price");
+      const res = await fetch(`${API}/fuel-price`);
       const data = await res.json();
 
       if (fuelType === "petrol") setFuelPrice(data.petrol.toString());

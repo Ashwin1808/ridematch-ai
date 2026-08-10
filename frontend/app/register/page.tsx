@@ -6,6 +6,8 @@ import Link from "next/link";
 
 export default function RegisterPage() {
   const router = useRouter();
+  const API = process.env.NEXT_PUBLIC_API_URL;
+
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,7 +19,7 @@ export default function RegisterPage() {
     try {
       setLoading(true);
 
-      const response = await fetch("http://localhost:5001/register", {
+      const response = await fetch(`${API}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

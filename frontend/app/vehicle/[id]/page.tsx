@@ -9,6 +9,7 @@ import Image from "next/image";
 export default function VehicleDetailsPage() {
   const params = useParams();
   const router = useRouter();
+  const API = process.env.NEXT_PUBLIC_API_URL;
 
   const [vehicle, setVehicle] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -38,7 +39,7 @@ export default function VehicleDetailsPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fuelResponse = await fetch("http://localhost:5001/fuel-prices");
+        const fuelResponse = await fetch(`${API}/fuel-prices`);
 
         const fuelData = await fuelResponse.json();
 
@@ -48,7 +49,7 @@ export default function VehicleDetailsPage() {
         // Vehicle
 
         const vehicleResponse = await fetch(
-          `http://localhost:5001/vehicle/${params.id}`,
+          `${API}/vehicle/${params.id}`,
         );
 
         const vehicleData = await vehicleResponse.json();
@@ -71,14 +72,14 @@ export default function VehicleDetailsPage() {
         );
 
         const similarResponse = await fetch(
-          `http://localhost:5001/similar/${params.id}`,
+          `${API}/similar/${params.id}`,
         );
 
         const similarData = await similarResponse.json();
 
         setSimilarVehicles(similarData.vehicles || []);
 
-        const aiResponse = await fetch("http://localhost:5001/vehicle-ai", {
+        const aiResponse = await fetch(`${API}/vehicle-ai`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -97,7 +98,7 @@ export default function VehicleDetailsPage() {
         // Reviews
 
         const reviewResponse = await fetch(
-          `http://localhost:5001/vehicle/${params.id}/reviews`,
+          `${API}/vehicle/${params.id}/reviews`,
         );
 
         const reviewData = await reviewResponse.json();

@@ -8,9 +8,11 @@ export default function FavoritesPage() {
   const [vehicles, setVehicles] = useState<any[]>([]);
   const [filter, setFilter] = useState<"all" | "car" | "bike">("all");
   const router = useRouter();
+  const API = process.env.NEXT_PUBLIC_API_URL;
+
 
   const loadFavorites = async () => {
-    const res = await fetch("http://localhost:5001/favorites");
+    const res = await fetch(`${API}/favorites`);
     const data = await res.json();
     setVehicles(data.vehicles || []);
   };
@@ -18,7 +20,7 @@ export default function FavoritesPage() {
   useEffect(() => { loadFavorites(); }, []);
 
   const removeFavorite = async (id: number) => {
-    await fetch(`http://localhost:5001/favorites/${id}`, { method: "DELETE" });
+    await fetch(`${API}/favorites/${id}`, { method: "DELETE" });
     loadFavorites();
   };
 

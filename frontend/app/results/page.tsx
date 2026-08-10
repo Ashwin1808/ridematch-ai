@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 export default function ResultsPage() {
   const router = useRouter();
 
+
+
   // const searchParams = useSearchParams();
 
   const [vehicles, setVehicles] = useState<any[]>([]);
