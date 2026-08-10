@@ -819,6 +819,8 @@ export default function CarsPage() {
   const [totalVehicles, setTotalVehicles] = useState(0);
   const [savingId, setSavingId] = useState<number | null>(null);
   const [favorites, setFavorites] = useState<number[]>([]);
+  const API = process.env.NEXT_PUBLIC_API_URL;
+
 
   const { compareList, addVehicle, removeVehicle, clearCompare } = useCompare();
 
@@ -829,7 +831,7 @@ export default function CarsPage() {
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
-        const res = await fetch("http://localhost:5001/favorites");
+        const res = await fetch(`${API}/favorites`);
 
         const data = await res.json();
 
@@ -854,7 +856,7 @@ export default function CarsPage() {
         params.append("limit", "12");
 
         const response = await fetch(
-          `http://localhost:5001/vehicles?${params.toString()}`,
+          `${API}/vehicles?${params.toString()}`,
         );
         const data = await response.json();
 
@@ -887,7 +889,7 @@ export default function CarsPage() {
     setSavingId(vehicleId);
 
     const response = await fetch(
-      "http://localhost:5001/favorites",
+      `${API}/favorites`,
       {
         method: "POST",
         headers: {
