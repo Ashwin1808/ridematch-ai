@@ -122,6 +122,7 @@ jobs:
       - name: Build Frontend Docker Image
         run: |
           docker build \
+            --build-arg NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }} \
             -t ashwindocker1808/ridematch-frontend:${{ github.sha }} \
             -t ashwindocker1808/ridematch-frontend:latest \
             ./frontend
