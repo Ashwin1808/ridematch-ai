@@ -38,3 +38,13 @@ variable "availability_zone_2" {
   description = "Second availability zone"
   type        = string
 }
+
+variable "ssh_allowed_cidr" {
+  description = "Trusted IPv4 CIDR block permitted to SSH to backend instances. Never use 0.0.0.0/0."
+  type        = string
+
+  validation {
+    condition     = can(cidrnetmask(var.ssh_allowed_cidr)) && !can(regex("^0\\.0\\.0\\.0/", var.ssh_allowed_cidr))
+    error_message = "ssh_allowed_cidr must be a valid IPv4 CIDR block and must not use 0.0.0.0/0."
+  }
+}

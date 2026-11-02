@@ -18,8 +18,6 @@ const cors = require("cors");
 
 require("dotenv").config();
 
-console.log("JWT:", process.env.JWT_SECRET);
-
 const app = express();
 
 const client = require("prom-client");
