@@ -74,7 +74,25 @@ The recommendation engine combines database filtering with deterministic scoring
 
 This hybrid approach keeps candidate selection grounded in the vehicle database while using AI to improve the recommendation experience.
 
-## Application features
+## Application Screenshots
+
+### Vehicle Discovery
+![Vehicle Discovery](docs/screenshots/homepage.png)
+
+### AI Recommendations
+![AI Recommendations](docs/screenshots/recommendations.png)
+
+### Vehicle Comparison
+![Vehicle Comparison](docs/screenshots/comparison.png)
+
+### Vehicle Details
+![Vehicle Details](docs/screenshots/vehicle-details.png)
+
+### Fuel Calculator
+![Fuel Calculator](docs/screenshots/fuel-calculator.png)
+
+### Automotive News
+![Automotive News](docs/screenshots/automotive-news.png)
 
 ### Vehicle discovery
 Browse the available vehicle catalogue and narrow results using filters.
