@@ -219,6 +219,12 @@ Check the Compose configuration and required environment variables before starti
 - Add stronger CI security gates and deployment verification.
 - Add screenshots and recorded deployment evidence.
 
+## Documentation
+
+- [System Architecture](docs/ARCHITECTURE.md)
+- [Technical Case Study](docs/HASHNODE_ARTICLE.md)
+- [LinkedIn Project Announcement](docs/LINKEDIN_POST.md)
+
 ## Project focus
 
 RideMatch AI demonstrates full-stack application development combined with practical DevOps implementation: containerization, CI/CD configuration, cloud infrastructure design, deployment workflows, and operational troubleshooting.
