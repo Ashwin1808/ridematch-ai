@@ -1,6 +1,9 @@
 # RideMatch AI 🚗
 ### AI-Powered Vehicle Discovery & Recommendation Platform
 
+<img width="1800" height="1013" alt="image" src="https://github.com/user-attachments/assets/ae28ccb3-4057-4302-a743-382755a73a36" />
+
+
 RideMatch AI is a full-stack vehicle discovery platform that helps users explore vehicles, filter options, compare specifications, and receive AI-assisted recommendations based on their preferences and budget.
 
 The project combines a Next.js frontend, Node.js/Express backend, PostgreSQL database, and Google Gemini integration. It also includes containerization, CI/CD workflows, AWS deployment configuration, and infrastructure-as-code.
